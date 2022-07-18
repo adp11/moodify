@@ -1,13 +1,340 @@
+:root {
+  --color-base-text: #000000;
+  --color-gray-text: #cccccc;
+  --color-pastel-text: #f53c3d;
+
+  --color-base-bg: #fff;
+  --color-sidebar-bg: #f2f3f9;
+
+  --color-button-bg: #f53c3d;
+
+  --box-shadow: 0 3px 10px rgba(28, 28, 28, 0.6);
+  --border: 1px #dbdbdb solid;
+
+  color: #fff2f2; /*hover track list*/
+  color: #fceeee; /*hover nav*/
+  color: #e6e7f2; /*hover sidebar list*/
+
+  color: #d78585; /*logo*/
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+* {
+  box-sizing: border-box;
+  color: var(--color-base-text);
+  font-size: 16px;
+}
+
+.App {
+  border: 1px red solid;
+  max-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 410px;
+  grid-template-rows: 120px 3fr 7fr;
+  grid-template-areas: 
+    "Nav Sidebar"
+    "Track-details Sidebar"
+    "Track-list Sidebar";
+}
+
+.inspiration {
+  margin: 0 50px;
+}
+
+.inspiration h3 {
+  font-size: 25px;
+  color: #50496d;
+}
+
+.inspiration p {
+  font-size: 18px;
+  color: #50496d;
+}
+
+/* NAV---------------- */
+.Nav {
+  border: 1px black solid;
+  grid-area: Nav;
+  margin: 30px 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  width: 150px;
+  height: auto;
+}
+
+.nav-buttons {
+  display: flex;
+}
+
+.nav-buttons > * {
+  padding: 10px 20px;
+  color: var(--color-gray-text);
+  font-size: 16px;
+  border-radius: 5px;
+  font-weight: 600;
+}
+
+.nav-buttons > *:hover {
+  background-color: #fceeee;
+  color: #f53c3d;
+}
+
+/* SIDEBAR---------------- */
+.Sidebar {
+  /* border: 1px blue solid; */
+  grid-area: Sidebar;
+  background-color: var(--color-sidebar-bg);
+  overflow-y: auto;
+  border-radius: 30px;
+  margin: 10px 30px;
+}
+
+.extra {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.Sidebar::-webkit-scrollbar { width: 0 !important }
+
+.profile {
+  border: 1px green solid;
+  display: flex;
+  margin: 15px 30px;
+  align-items: center;
+}
+
+.Sidebar img {
+  width: 60px;
+  height: auto;
+  border-radius: 10px;
+  margin-right: 15px;
+}
+
+.stats {
+  border: 1px red solid;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: 15px 30px;
+}
+
+.stats > * {
+  display: flex;
+  align-items: center;
+}
+
+.stats img {
+  width: 25px;
+  height: auto;
+}
+
+.recc-list {
+  border: 1px black solid;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: 15px 30px;
+}
+
+.recc {
+  display: flex;
+}
+
+.recc img {
+  height: 40px;
+  width: auto;
+}
+
+/* LOGIN---------------- */
+.btn-spotify {
+  background-color:#44c767;
+  border-radius:28px;
+  border: none;
+  color:#ffffff;
+  font-size:17px;
+  padding:16px 31px;
+}
+
+.btn-spotify a {
+  color:#fff;
+  font-weight: 600;
+}
+
+.btn-spotify:active {
+  position: relative;
+  top:1px;
+}
+
+/* BLANK PAGE---------------- */
+.BlankPage img {
+  width: 300px;
+  height: auto;
+}
+
+.BlankPage {
+  /* border: 1px black solid; */
+  margin: 0 50px;
+  text-align: center;
+}
+
+.BlankPage p {
+  font-weight: 600;
+}
+
+/* TRACK DETAILS---------------- */
+.Track-details {
+  /* border: 1px green solid; */
+  grid-area: Track-details;
+  margin: 0px 50px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.Track-details img {
+  border-radius: 20px;
+  height: 200px;
+  width: auto;
+}
+
+.Track-details .details > * {
+  margin: 10px;
+}
+
+.Track-details button {
+  border: none;
+  color: #fff;
+  background-color: var(--color-button-bg);
+  display: flex;
+  align-items: center;
+  border-radius: 15px;
+  padding: 10px 20px;
+  border: 1px transparent solid;
+}
+
+.Track-details button:hover {
+  background-color: #fff;
+  border: 1px #f53c3d solid;
+  color: #f53c3d;
+}
+
+.Track-details button:hover path {
+  fill: #f53c3d;
+}
+
+/* TRACK LIST---------------- */
+.Track-list {
+  /* border: 1px blue solid; */
+  grid-area: Track-list;
+  margin: 30px 50px;
+}
+
+.Track-list img {
+  width: 30px;
+  height: auto;
+  border-radius: 10px;
+  margin-right: 15px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+thead {
+  text-align: start;
+  color: #cccccc;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+tr, th {
+  border-bottom: 1px #efefef solid;
+}
+
+th, td {
+  padding: 10px 0;
+}
+
+th {
+  text-align: start;
+  color: #cccccc;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+tr:last-of-type {
+  border-bottom: none;
+}
+
+tr td:first-child {
+  display: flex;
+  align-items: center;
+}
+
+tbody tr:hover {
+  background-color: #fceeee;
+}
+
+tbody tr:hover > td {
+  color: #f53c3d;
+}
+
+
+/* PLAYER---------------- */
+.Player {
+  display: none;
+}
+
+/* UTILS */
+.gray {
+  color: #c0c0c0;
+}
+
+a {
+  text-decoration: none;
+}
+
+.supergray {
+  color: #9b9b9b
+}
+
+.bold {
+  font-weight: 600;
+}
+
+.superbold {
+  font-weight: 700;
+}
+
+.superbig {
+  font-size: 30px;
+}
+
+.big {
+  font-size: 18px;
+}
+
+.medium {
+  font-size: 14px;
+}
+
+.small {
+  font-size: 12px;
+}
+
+tr:hover, .nav-buttons > *:hover, button:hover {
+  cursor: pointer;
 }
