@@ -4,7 +4,7 @@ function Login() {
   return (
     <div className="Login">
       <button type="button" className="btn-spotify">
-        <a href="/auth/login">
+        <a href="http://localhost:5000/auth/login">
           Login with Spotify
         </a>
       </button>

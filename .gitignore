@@ -2,6 +2,7 @@
 
 # dependencies
 client/node_modules
+server/node_modules
 /.pnp
 .pnp.js
 
@@ -9,8 +10,9 @@ client/node_modules
 /coverage
 
 # local
-client/app-notes.txt
+notes.txt
 .vscode
+server/.env
 
 # production
 /build
