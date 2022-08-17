@@ -71,13 +71,16 @@ function App() {
       };
       const response = await fetch("http://localhost:5000/auth/token", options);
       const data = await response.json();
-      if (response.ok) { // no token in cookie
+      if (response.ok) {
         setToken(data.accessToken);
+      } else { // no token in cookie
+        setDidInitialFetch(true);
+        setIsLoggedIn(false);
       }
     }
 
-    getToken();
     loadModels();
+    getToken();
   }, []);
 
   useEffect(() => {
@@ -138,6 +141,7 @@ function App() {
         .all(parallelURLs.map((URL) => fetch(URL, options)))
         .then((responses) => Promise.all(responses.map((res) => res.json())))
         .then(async (results) => {
+          console.log("results", results);
           if (results[0].error) { // expired token
             setDidInitialFetch(true);
             setIsLoggedIn(false);
@@ -157,7 +161,9 @@ function App() {
   }, [token]);
 
   useEffect(() => () => {
-    player.disconnect();
+    if (player) {
+      player.disconnect();
+    }
   }, []);
 
   return (

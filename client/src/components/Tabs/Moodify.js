@@ -136,7 +136,7 @@ function Moodify() {
         </div>
       </div>
       {isLoading ? <img src={LOADING_IMAGE_URL} alt="loading" style={{ display: "block" }} /> : <div />}
-      {emotionResult && <div className="bold">{`YOU MIGHT NOT BE, BUT YOU LOOK ${emotionResult} NOW.`}</div>}
+      {emotionResult && <div className="bold">{`I THINK YOU LOOK ${emotionResult}.`}</div>}
       <button type="button" className="moodify" onClick={handleImageProcessing}>Moodify</button>
 
     </div>

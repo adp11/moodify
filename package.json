@@ -1,0 +1,15 @@
+{
+  "name": "moodify",
+  "version": "1.0.0",
+  "description": "This package.json is ONLY for instructing Heroku how to navigate through this repo for production.",
+  "engines": {
+    "node": "16.13.2"
+  },
+  "scripts": {
+    "client-install": "npm install --prefix client",
+    "start": "cd server && npm install && node server.js",
+    "heroku-postbuild": "npm run client-install && DISABLE_ESLINT_PLUGIN=true npm run build --prefix client"
+  },
+  "author": "Andrew Pham",
+  "license": "ISC"
+}

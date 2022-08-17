@@ -7,9 +7,8 @@ const cors = require("cors");
 require("dotenv").config();
 
 const app = express();
-const spotifyRedirectUri = "http://localhost:5000/auth/callback";
 
-app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -24,7 +23,7 @@ app.get("/auth/login", (req, res) => {
     response_type: "code",
     client_id: process.env.SPOTIFY_CLIENT_ID,
     scope,
-    redirect_uri: spotifyRedirectUri,
+    redirect_uri: process.env.SPOTIFY_REDIRECT_URI,
     state,
   });
   res.redirect(`https://accounts.spotify.com/authorize/?${authQueryParameters.toString()}`);
@@ -37,7 +36,7 @@ app.get("/auth/callback", (req, res) => {
     url: "https://accounts.spotify.com/api/token",
     form: {
       code,
-      redirect_uri: spotifyRedirectUri,
+      redirect_uri: process.env.SPOTIFY_REDIRECT_URI,
       grant_type: "authorization_code",
     },
     headers: {
@@ -50,7 +49,7 @@ app.get("/auth/callback", (req, res) => {
   request.post(authOptions, (error, response, body) => {
     if (!error && response.statusCode === 200) {
       res.cookie("accessToken", body.access_token, { httpOnly: true });
-      res.redirect("http://localhost:3000");
+      res.redirect(process.env.CLIENT_URL);
     }
   });
 });
@@ -58,6 +57,13 @@ app.get("/auth/callback", (req, res) => {
 app.get("/auth/token", extractToken, (req, res) => {
   res.json({ accessToken: req.accessToken });
 });
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "..", "client", "build")));
+  app.get(["/", "/browse", "/inspiration", "/moodify"], (req, res) => {
+    res.sendFile(path.resolve(__dirname, "..", "client", "build", "index.html"));
+  });
+}
 
 // Helper Spotify login function
 function generateRandomString(length) {
@@ -73,23 +79,29 @@ function generateRandomString(length) {
 // Helper token function
 function extractToken(req, res, next) {
   let accessToken;
-  req.headers.cookie.split(" ").some((cookie) => {
-    const equalPosition = cookie.indexOf("=");
-    if (cookie.substring(0, equalPosition) === "accessToken") {
-      const semiColonPosition = cookie.indexOf(";");
-      if (semiColonPosition > -1) {
-        accessToken = cookie.substring(equalPosition + 1, cookie.length - 1);
-      } else {
-        accessToken = cookie.substring(equalPosition + 1);
+  if (req.headers.cookie) {
+    req.headers.cookie.split(" ").some((cookie) => {
+      const equalPosition = cookie.indexOf("=");
+      if (cookie.substring(0, equalPosition) === "accessToken") {
+        const semiColonPosition = cookie.indexOf(";");
+        if (semiColonPosition > -1) {
+          accessToken = cookie.substring(equalPosition + 1, cookie.length - 1);
+        } else {
+          accessToken = cookie.substring(equalPosition + 1);
+        }
+        return true;
       }
-      return true;
-    }
-    return false;
-  });
+      return false;
+    });
 
-  if (accessToken) {
-    req.accessToken = accessToken;
-    return next();
+    if (accessToken) {
+      req.accessToken = accessToken;
+      return next();
+    }
+    return next({
+      status: 401,
+      message: "Token expired/not found. Need login",
+    });
   }
   return next({
     status: 401,

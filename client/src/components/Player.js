@@ -112,6 +112,9 @@ function Player() {
       }).then((res) => res.json())
         .then((data) => {
           alert("Spotify Error of not finding this track. You need to refresh the app right now and this track cannot be played in the future!");
+        })
+        .catch((err) => {
+          // ignore SyntaxError
         });
     }
   }, [playingTrack, deviceId, isReady, player]);

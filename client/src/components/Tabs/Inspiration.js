@@ -19,7 +19,7 @@ function Inspiration() {
       <p>And Moodify is that something/someone.</p>
 
       <h3>Access</h3>
-      <p>The app requires a Spotify account and needs your authorization. Your experience with Moodify will be better if your Spotify account has more than 50 tracks.</p>
+      <p>The app requires a Spotify account and needs your authorization. Your experience with Moodify will be better if your Spotify account has more than 100 tracks.</p>
 
       <h3>Privacy</h3>
       <p>No data (including your pictures and videos) will be saved from your usage. It only uses cookies to support better sessions and thus better user experience.</p>
