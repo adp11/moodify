@@ -8,7 +8,7 @@
   <p align="center">
     A full-stack web application that automatically reads your face and detects your mood to play a Spotify track that matches it most.
     <br />
-    <a href="https://google.com">View Demo</a> 👈
+    <a href="https://adp11-moodify.herokuapp.com">View Demo</a> 👈
   </p>
 </div>
 

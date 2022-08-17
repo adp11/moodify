@@ -1,10 +1,12 @@
 import React from "react";
 
+const SERVER_URL = "https://adp11-moodify.herokuapp.com";
+
 function Login() {
   return (
     <div className="Login">
       <button type="button" className="btn-spotify">
-        <a href="http://localhost:5000/auth/login">
+        <a href={`${SERVER_URL}/auth/login`}>
           Login with Spotify
         </a>
       </button>

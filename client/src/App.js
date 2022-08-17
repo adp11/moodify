@@ -14,6 +14,8 @@ import BlankPage from "./components/Utils/BlankPage";
 import Player from "./components/Player";
 import WaitingPage from "./components/Utils/WaitingPage";
 
+const SERVER_URL = "https://adp11-moodify.herokuapp.com";
+
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [profile, setProfile] = useState(null);
@@ -69,7 +71,7 @@ function App() {
         },
         credentials: "include",
       };
-      const response = await fetch("http://localhost:5000/auth/token", options);
+      const response = await fetch(`${SERVER_URL}/auth/token`, options);
       const data = await response.json();
       if (response.ok) {
         setToken(data.accessToken);
@@ -141,7 +143,6 @@ function App() {
         .all(parallelURLs.map((URL) => fetch(URL, options)))
         .then((responses) => Promise.all(responses.map((res) => res.json())))
         .then(async (results) => {
-          console.log("results", results);
           if (results[0].error) { // expired token
             setDidInitialFetch(true);
             setIsLoggedIn(false);
