@@ -132,7 +132,7 @@ function App() {
           setIsLoggedIn(true);
         })
         .catch((err) => {
-          alert(err);
+          // alert(err);
         });
     }
 
@@ -156,7 +156,7 @@ function App() {
           }
         })
         .catch((err) => {
-          alert(err);
+          // alert(err);
         });
     }
   }, [token]);
