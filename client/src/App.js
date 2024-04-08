@@ -14,7 +14,7 @@ import BlankPage from "./components/Utils/BlankPage";
 import Player from "./components/Player";
 import WaitingPage from "./components/Utils/WaitingPage";
 
-const SERVER_URL = "https://adp11-moodify.herokuapp.com";
+const SERVER_URL = "https://moodify-adp.onrender.com";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);

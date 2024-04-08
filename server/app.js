@@ -63,6 +63,11 @@ if (process.env.NODE_ENV === "production") {
   app.get(["/", "/browse", "/inspiration", "/moodify"], (req, res) => {
     res.sendFile(path.resolve(__dirname, "..", "client", "build", "index.html"));
   });
+
+  const https = require("https");
+  setInterval(() => {
+    https.get("https://moodify-adp.onrender.com");
+  }, 300000); // every 5 minutes (300000)
 }
 
 // Helper Spotify login function

@@ -1,6 +1,6 @@
 import React from "react";
 
-const SERVER_URL = "https://adp11-moodify.herokuapp.com";
+const SERVER_URL = "https://moodify-adp.onrender.com";
 
 function Login() {
   return (
