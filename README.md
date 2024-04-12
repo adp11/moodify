@@ -15,8 +15,8 @@
 [![Demo Gif][product-demo]](https://moodify-adp.onrender.com)
 
 ### Features Supported
-1. Authentication with Spotify
-2. Play, pause, skip back/next any song from your Spotify account
+1. Authorization with Spotify OAuth2
+2. Play, pause, seek backward/forward any song in user playlists
 3. Recognize face, detect mood, play mood-matching songs
 4. Song search
 
